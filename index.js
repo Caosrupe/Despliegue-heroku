@@ -2,7 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const mongoose = require('mongoose');
-const handlebars = require('express-handlebars');
+const {engine} = require('express-handlebars');
 const cluster = require('cluster');
 const compression = require('compression');
 const log4js = require('log4js');
@@ -103,11 +103,12 @@ if(modoCluster && cluster.isMaster) {
 
     app.engine(
         "hbs", 
-        handlebars({
+        engine({
             extname: ".hbs",
             defaultLayout: 'index.hbs',
         })
-    );
+           
+ );
 
 
     app.set("view engine", "hbs");
