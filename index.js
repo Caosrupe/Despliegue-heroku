@@ -17,7 +17,7 @@ const numCPUs = require('os').cpus().length;
 
 const portCL = process.argv[2] || 5504;
 const FACEBOOK_APP_ID = process.argv[3] || '359417446081291';
-const FACEBOOK_APP_SECRET = process.argv[4] || '59ef2019e21f4baf1fc450a621393312';
+const FACEBOOK_APP_SECRET = process.argv[4] || '45b6f322aa9ef44828dc30bc3416e7bd';
 const modoCluster = process.argv[5] == 'CLUSTER';
 
 
@@ -210,3 +210,4 @@ if(modoCluster && cluster.isMaster) {
 
     loggerInfo.info(`Worker ${process.pid} started`);
 };
+app.use(function(req, res, next) {if ((!req.secure) && (req.get('X-Forwarded-Proto') !== 'https')) {res.redirect(307, 'https://' + req.get('Host') + req.url);} elsenext();});
